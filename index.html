@@ -10,20 +10,51 @@
         }
         .pdf-container {
             width: 100%;
-            height: 50vh; /* Half of viewport height for each PDF */
+            height: 100vh;
+            display: none; /* Hide all containers by default */
+        }
+        .pdf-container.active {
+            display: block; /* Show only active container */
         }
         embed {
             width: 100%;
             height: 100%;
         }
+        .buttons {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <div class="pdf-container">
+    <div class="buttons">
+        <button onclick="showPDF('pdf1')">Kahve PDF</button>
+        <button onclick="showPDF('pdf2')">ROR PDF</button>
+    </div>
+    
+    <div id="pdf1" class="pdf-container active">
         <embed src="kahve.pdf" type="application/pdf">
     </div>
-    <div class="pdf-container">
+    <div id="pdf2" class="pdf-container">
         <embed src="ROR_Kitap.pdf" type="application/pdf">
     </div>
+
+    <script>
+        function showPDF(pdfId) {
+            // Hide all PDF containers
+            document.querySelectorAll('.pdf-container').forEach(container => {
+                container.classList.remove('active');
+            });
+            // Show selected PDF container
+            document.getElementById(pdfId).classList.add('active');
+        }
+    </script>
 </body>
 </html>
