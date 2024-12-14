@@ -11,10 +11,10 @@
         .pdf-container {
             width: 100%;
             height: 100vh;
-            display: none; /* Hide all containers by default */
+            display: none;
         }
         .pdf-container.active {
-            display: block; /* Show only active container */
+            display: block;
         }
         embed {
             width: 100%;
@@ -22,7 +22,7 @@
         }
         .buttons {
             position: fixed;
-            top: 10px;
+            bottom: 10px; /* Butonları alta taşıdık */
             right: 10px;
             z-index: 1000;
         }
@@ -30,15 +30,13 @@
             padding: 10px;
             margin: 5px;
             cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.8); /* Yarı saydam arka plan */
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="buttons">
-        <button onclick="showPDF('pdf1')">Kahve PDF</button>
-        <button onclick="showPDF('pdf2')">ROR PDF</button>
-    </div>
-    
     <div id="pdf1" class="pdf-container active">
         <embed src="kahve.pdf" type="application/pdf">
     </div>
@@ -46,13 +44,16 @@
         <embed src="ROR_Kitap.pdf" type="application/pdf">
     </div>
 
+    <div class="buttons">
+        <button onclick="showPDF('pdf1')">Kahve PDF</button>
+        <button onclick="showPDF('pdf2')">ROR PDF</button>
+    </div>
+
     <script>
         function showPDF(pdfId) {
-            // Hide all PDF containers
             document.querySelectorAll('.pdf-container').forEach(container => {
                 container.classList.remove('active');
             });
-            // Show selected PDF container
             document.getElementById(pdfId).classList.add('active');
         }
     </script>
